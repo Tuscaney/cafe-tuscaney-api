@@ -126,6 +126,7 @@ cafe-tuscaney-api/
   │   └─ types/
   └─ package.json
 
+
 cafe-tuscaney-frontend/
   ├─ README.md
   ├─ index.html
@@ -136,7 +137,9 @@ cafe-tuscaney-frontend/
   │   ├─ store/CartContext.jsx
   │   └─ lib/api.js
   └─ package.json
---- 
+  
+  .
+---
 
 ## (9) 💵 Pricing Rules (clear & consistent)
 
