@@ -168,7 +168,7 @@ cafe-tuscaney-frontend/
 - **Sandwich+Salad+Soup+Side:** 10% off (May change)
 - **Any two-item combo:** 5% off
 
-**Sweet Treats:** per-item price (see menu seeds).
+**Sweet Treats:** per-item price (see menu seeds). 
 
 All prices computed server-side. Frontend shows live estimate using same rule constants.
 --- 
@@ -231,10 +231,15 @@ Below is a compact representation for seeding Menu. Each category exposes groups
 
 ## 🍰 Sweet Treats (each item has own price)
 **Cookies:** Chocolate Chip, Shortbread/Sugar, Oatmeal, Peanut Butter
+
 **Cakes:** Lemon, Butter, Chocolate, Red Velvet
+
 **Cinnamon Rolls:** Traditional, Chocolate, Strawberry Shortcake
+
 **Cheesecake Toppings:** Strawberry, Chocolate
+
 **Tarts:** Strawberry, Lemon, Chocolate
+
 **Muffins:** Blueberry, Strawberry, Chocolate, Banana, Poppyseed
 
 Seed JSON will mirror the above groups with id, label, and optional priceDelta fields.
@@ -252,4 +257,4 @@ Seed JSON will mirror the above groups with id, label, and optional priceDelta f
 9. feat(admin): Cognito + admin orders dashboard
 10. chore(deploy): S3+CloudFront, API Gateway stage
 11. test: add 2+ automated tests (pricing calc, order payload)
-12. docs: update READMEs with URLs & screenshots
+12. docs: update READMEs with URLs & 
