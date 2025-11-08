@@ -98,7 +98,7 @@ Orders (header + line items)
 
 **Build/Deploy**
 - **Frontend:** npm run build → upload dist/ to S3 → CloudFront.
-- **Backend:** bundle handlers with esbuild/tsup; deploy (SAM/Serverless or manual zips); create API stage.
+- **Backend:** bundle handlers with esbuild/tsup; deploy (SAM/Serverless); create API stage.
 ---
 
 7) ## NPM Libraries / Tools
