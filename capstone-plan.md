@@ -17,6 +17,8 @@
 - Customer can create any item from the provided menu options, add to cart, and place an order.
 - Cart/Checkout captures name, phone, pickup time; order status page with polling.
 - Admin page (protected) to list orders and update status.
+
+.
 ---
 
 ## (2) 🛠️ Planned Backend
@@ -78,6 +80,7 @@ Orders (header + line items)
 5. **Order Status** — enter/orderId param; auto refresh to show status.
 
 6. **Admin (protected)** — list orders by status; update status.
+
 ---
 
 ## (5) 🔒 Authentication Flow
@@ -85,6 +88,7 @@ Orders (header + line items)
 - **Customers:** No login.
 - **Admins: Cognito** (OIDC code flow). API Gateway authorizer protects admin routes.
 - **Protected pages:** /admin/*.
+
 ---
 
 ## (6) 🚀 Deployment Plan
@@ -100,6 +104,7 @@ Orders (header + line items)
 **Build/Deploy**
 - **Frontend:** npm run build → upload dist/ to S3 → CloudFront.
 - **Backend:** zip JS handlers (or use SAM/Serverless); deploy; create API stage
+
 ---
 
 ## (7) 📦 NPM Libraries / Tools
@@ -109,6 +114,7 @@ Orders (header + line items)
 - **Backend:** @aws-sdk/client-dynamodb, @aws-sdk/lib-dynamodb, zod, uuid, middy, @middy/http-json-body-parser, @middy/http-cors.
 
 - **Dev:** eslint, prettier, vitest (tests).
+
 ---
 
 ## (8) 🗂️ Directory Setup
