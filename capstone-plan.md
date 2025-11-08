@@ -1,10 +1,11 @@
-# Café Tuscaney (Capstone Project Plan)
+# ☕ Café Tuscaney (Capstone Project Plan)
 
 **Author:** Tuscaney Carraway
+
 **Project:** Café Tuscaney — customizable café ordering app
 ---
 
-1) ## Project Description & Purpose
+## (1) 🎯 Project Description & Purpose
 
 **Problem:** Small cafés that offer highly customizable items (sandwiches, salads, soups, crafted drinks) struggle with slow phone orders and miscommunication.
 **Solution:** A simple web app where customers build their order from structured options, see pricing clearly (base + upcharges), add items to a cart, and place an order for pickup. Staff can view and update order status.
@@ -18,9 +19,9 @@
 - Admin page (protected) to list orders and update status.
 ---
 
-2) ## Planned Backend
+## (2) 🛠️ Planned Backend
 
-**Stack (Option 2): AWS Lambda + API Gateway + DynamoDB** (TypeScript).
+**Stack (Option 2): AWS Lambda + API Gateway + DynamoDB** (JavaScript).
 
 ### DynamoDB Tables
 Menu (reference/config — drives builders)
@@ -39,30 +40,30 @@ Orders (header + line items)
 (Future Add) Users for staff if needed beyond Cognito.
 ---
 
-3) ## API Routes & Methods
+## (3) 🔗 API Routes & Methods
 
 ## Base: /api
 
-### Menu
+### 🧾 Menu
 - GET /menu → Return full menu (all categories, grouped for UI).
 - GET /menu/:category → Return one category (e.g., salad).
 - (Admin) PUT /menu/:category/:group → Toggle availability or price (protected).
 
-### Orders
+### 📦 Orders
 - POST /orders → Create order from cart payload; server calculates prices/totals.
 - GET /orders/:orderId → Get order for status page.
 - (Admin) GET /orders?status=placed → List recent orders by status (protected).
 - (Admin) PATCH /orders/:orderId → Update status (protected).
 
-### Auth
+### 🔐 Auth
 - Admin only via Amazon Cognito Hosted UI; customers checkout without auth.
 
 **Validation:** zod on all mutating inputs. Pricing computed on backend.
 ---
 
-4) ## Frontend Features & Pages
+## (4) 🎨 Frontend Features & Pages
 
-**Stack:** React + Vite + TypeScript + Tailwind + React Router; state via **React Context + useReducer** (no extra store lib).
+**Stack:** React + Vite + JavaScript + Tailwind + React Router; state via **React Context + useReducer** (no extra store lib).
 
 **Pages**
 
@@ -79,14 +80,14 @@ Orders (header + line items)
 6. **Admin (protected)** — list orders by status; update status.
 ---
 
-5) ## Authentication Flow
+## (5) 🔒 Authentication Flow
 
 - **Customers:** No login.
 - **Admins: Cognito** (OIDC code flow). API Gateway authorizer protects admin routes.
 - **Protected pages:** /admin/*.
 ---
 
-6) ## Deployment Plan
+## (6) 🚀 Deployment Plan
 
 **Frontend:** S3 static hosting + CloudFront (SPA: 404 → /index.html).
 **Backend:** AWS Lambda (Node 20) + API Gateway REST.
@@ -98,28 +99,30 @@ Orders (header + line items)
 
 **Build/Deploy**
 - **Frontend:** npm run build → upload dist/ to S3 → CloudFront.
-- **Backend:** bundle handlers with esbuild/tsup; deploy (SAM/Serverless); create API stage.
+- **Backend:** zip JS handlers (or use SAM/Serverless); deploy; create API stage
 ---
 
-7) ## NPM Libraries / Tools
+## (7) 📦 NPM Libraries / Tools
 
-**Frontend:** react, react-dom, react-router-dom, tailwindcss, React Context + useReducer (no extra package), zod, clsx, axios (or fetch).
-**Backend:** @aws-sdk/client-dynamodb, @aws-sdk/lib-dynamodb, zod, uuid, middy, @middy/http-json-body-parser, @middy/http-cors.
-**Dev:** typescript, tsup/esbuild, eslint, prettier, vitest (tests).
+- **Frontend:** react, react-dom, react-router-dom, tailwindcss, React Context + useReducer (no extra package), zod, clsx, axios (or fetch).
+
+- **Backend:** @aws-sdk/client-dynamodb, @aws-sdk/lib-dynamodb, zod, uuid, middy, @middy/http-json-body-parser, @middy/http-cors.
+
+- **Dev:** eslint, prettier, vitest (tests).
 ---
 
-8) ## Directory Setup
+## (8) 🗂️ Directory Setup
 
 cafe-tuscaney-api/
   ├─ capstone-plan.md
   ├─ README.md
   ├─ src/
   │   ├─ handlers/
-  │   │   ├─ getMenu.ts
-  │   │   ├─ createOrder.ts
-  │   │   ├─ getOrder.ts
-  │   │   └─ adminUpdateStatus.ts
-  │   ├─ lib/{dynamo.ts, pricing.ts, validation.ts}
+  │   │   ├─ getMenu.js
+  │   │   ├─ createOrder.js
+  │   │   ├─ getOrder.js
+  │   │   └─ adminUpdateStatus.js
+  │   ├─ lib/{dynamo.js, pricing.js, validation.js}
   │   └─ types/
   └─ package.json
 
@@ -127,15 +130,15 @@ cafe-tuscaney-frontend/
   ├─ README.md
   ├─ index.html
   ├─ src/
-  │   ├─ main.tsx, App.tsx
-  │   ├─ pages/{Home,BuildSandwich,BuildSalad,BuildSoup,BuildDrink,Combos,Cart,OrderStatus,Admin}.tsx
-  │   ├─ components/{OptionGroup,PriceBadge,CartItem}.tsx
-  │   ├─ store/CartContext.tsx
-  │   └─ lib/api.ts
+  │   ├─ main.tsx, App.jsx
+  │   ├─ pages/{Home,BuildSandwich,BuildSalad,BuildSoup,BuildDrink,Combos,Cart,OrderStatus,Admin}.jsx
+  │   ├─ components/{OptionGroup,PriceBadge,CartItem}.jsx
+  │   ├─ store/CartContext.jsx
+  │   └─ lib/api.js
   └─ package.json
 --- 
 
-9) ## Pricing Rules (clear & consistent)
+## (9) 💵 Pricing Rules (clear & consistent)
 
 **Sandwich base:** $8.00. Includes: 1 bread, one meat, one cheese, unlimited veggies/condiments.
 - **Extra meat:** +$2.00 each.
@@ -161,11 +164,11 @@ cafe-tuscaney-frontend/
 All prices computed server-side. Frontend shows live estimate using same rule constants.
 --- 
 
-10) ## Data Dictionary & Full Menu (drives UI)
+## (10) 📚 Data Dictionary & Full Menu (drives UI)
 
 Below is a compact representation for seeding Menu. Each category exposes groups with type: single|multi and optional priceDelta for paid add-ons.
 
-## Sandwich
+## 🥪 Sandwich
 - **Bread (single):** Wheat, White, Italian, Sourdough (toasted flag boolean)
 - **Meat (single + multi for extras):** Chicken, Turkey, Roast Beef, Steak (extra +$2 each)
 - **Cheese (single):** American, Pepper Jack, Swiss, Provolone, Mozzarella, Cheddar
@@ -173,7 +176,7 @@ Below is a compact representation for seeding Menu. Each category exposes groups
 - **Veggies (multi):** Tomato, Cucumber, Onion
 - **Condiments (multi):** Mayo, Spicy Mayo, Mustard, Sweet Mustard, Spicy Mustard, Italian Dressing, Ranch Dressing
 
-## Salad
+## 🥗 Salad
 **Lettuce Base (single):** Iceberg, Kale, Spinach, Butter, Arugula
 **Veggies (multi):** Croutons, Onions, Cucumbers, Bell Peppers, Carrots, Broccoli
 **Fruits (multi):** Berries, Grapes, Apples, Pears, Peaches, Mandarin Oranges, Avocado, Tomato, Pineapple, Olives, Dried: Cranberries, Raisins, Cherries, Mango
@@ -187,7 +190,7 @@ Below is a compact representation for seeding Menu. Each category exposes groups
 - **Shredded/Hard:** Parmesan, Cheddar, Mozzarella
 **Other Additions (multi, +$1 each):** Grains (Quinoa, Farro, Bulgur, Rice), Crunchy (Croutons, Tortilla Chips, Water Chestnuts), Fresh Herbs (Dill, Basil, Parsley, Chives, Mint)
 
-## Soup
+## 🍲 Soup
 **Broth (single):** Chicken, Turkey, Beef, Vegetable, Fish
 **Proteins (multi):** Meat/Poultry (Grilled Chicken, Turkey, Steak, Ham, Bacon, Tuna, Salmon); Vegetarian (Hard-Boiled Eggs, Black Beans, Chickpeas, Edamame, Tofu, Falafel, Lentils) — 2+ proteins add +$3 each
 **Vegetables (multi):**
@@ -199,7 +202,7 @@ Below is a compact representation for seeding Menu. Each category exposes groups
 - **Legumes:** Green Beans, Peas, Corn, Lentils, Chickpeas, Cannellini Beans
 - **Other:** Tomatoes, Bell Peppers, Mushrooms, Asparagus, Okra
 
-## Combos
+## 🍱 Combos
 - Sandwich + Salad + Soup + Side
 - Sandwich + Salad
 - Sandwich + Soup
@@ -208,7 +211,7 @@ Below is a compact representation for seeding Menu. Each category exposes groups
 - Salad + Side
 - Soup + Side
 
-## Drinks (Craft Your Own)
+## 🧋 Drinks (Craft Your Own)
 
 **Base (single):** Lemonade, Tea, Coffee, Flavored Water
 **Flavors (multi, +$0.50 each)**
@@ -217,7 +220,7 @@ Below is a compact representation for seeding Menu. Each category exposes groups
 - **Other:** Ginger, Vanilla, Cinnamon, Cardamom, Sichuan Peppercorns
 - **Modifier:** Sparkling (+$0.50)
 
-## Sweet Treats (each item has own price)
+## 🍰 Sweet Treats (each item has own price)
 **Cookies:** Chocolate Chip, Shortbread/Sugar, Oatmeal, Peanut Butter
 **Cakes:** Lemon, Butter, Chocolate, Red Velvet
 **Cinnamon Rolls:** Traditional, Chocolate, Strawberry Shortcake
@@ -227,7 +230,7 @@ Below is a compact representation for seeding Menu. Each category exposes groups
 
 Seed JSON will mirror the above groups with id, label, and optional priceDelta fields.
 
-11) ## Milestones & Commit Flow (mimic human development)
+## (11) 🧭 Milestones & Commit Flow (mimic human development)
 
 1. docs(plan): add capstone plan with full menu & architecture
 2. feat(web): scaffold Vite+Tailwind, routes & navbar
